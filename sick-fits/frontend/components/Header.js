@@ -1,5 +1,6 @@
 import Link from "next/link";
 import styled from "styled-components";
+import Cart from "./Cart";
 import Nav from "./Nav";
 
 const Logo = styled.h1`
@@ -25,7 +26,6 @@ const HeaderStyles = styled.header`
     justify-content: space-between;
     align-items: stretch;
   }
-
   .sub-bar {
     display: grid;
     grid-template-columns: 1fr auto;
@@ -38,16 +38,14 @@ export default function Header() {
     <HeaderStyles>
       <div className='bar'>
         <Logo>
-          <Link href='/'>Sickfits</Link>
+          <Link href='/'>Sick fits</Link>
         </Logo>
         <Nav />
       </div>
       <div className='sub-bar'>
-        <p>search</p>
+        <p>Search</p>
       </div>
+      <Cart />
     </HeaderStyles>
   );
 }
-
-export const Lists = styled.div``;
-export const ListItem = styled.div``;

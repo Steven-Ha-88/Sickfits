@@ -1,31 +1,27 @@
+import { ApolloProvider } from "@apollo/client";
 import NProgress from "nprogress";
 import Router from "next/router";
-import { ApolloProvider } from "@apollo/client";
 import Page from "../components/Page";
-
-// TODO: swap with your own
-import "nprogress/nprogress.css";
 import "../components/styles/nprogress.css";
 import withData from "../lib/withData";
+import { CartStateProvider } from "../lib/cartState";
 
-// adds progress bar when routing.
 Router.events.on("routeChangeStart", () => NProgress.start());
 Router.events.on("routeChangeComplete", () => NProgress.done());
 Router.events.on("routeChangeError", () => NProgress.done());
 
 function MyApp({ Component, pageProps, apollo }) {
-  console.log(apollo);
   return (
     <ApolloProvider client={apollo}>
-      <Page>
-        <Component {...pageProps} />
-      </Page>
+      <CartStateProvider>
+        <Page>
+          <Component {...pageProps} />
+        </Page>
+      </CartStateProvider>
     </ApolloProvider>
   );
 }
 
-// allows next.js and apollo to work with each other. This waits for apollo to crawl
-// pages for any queries. Mod5#19
 MyApp.getInitialProps = async function ({ Component, ctx }) {
   let pageProps = {};
   if (Component.getInitialProps) {

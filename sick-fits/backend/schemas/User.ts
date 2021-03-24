@@ -4,19 +4,18 @@ import { text, password, relationship } from "@keystone-next/fields";
 export const User = list({
   // access:
   // ui
-
   fields: {
-    name: text({ isRequried: true }),
+    name: text({ isRequired: true }),
     email: text({ isRequired: true, isUnique: true }),
     password: password(),
     cart: relationship({
       ref: "CartItem.user",
       many: true,
       ui: {
-        createView: { fieldmode: "hidden" },
-        itemView: { fieldmode: "read" },
+        createView: { fieldMode: "hidden" },
+        itemView: { fieldMode: "read" },
       },
     }),
-    // TODO, add roles, carts and orders
+    orders: relationship({ ref: "Order.user", many: true }),
   },
 });
